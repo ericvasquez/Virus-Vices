@@ -1,7 +1,7 @@
 const express = require('express')
 var router = express.Router()
 
-// const virus = require('../models/virusVices')
+const blackCard = require('../models/virusVices')
 const orm = require('../config/orm')
 
 router.get('/', (req, res) => {
@@ -9,9 +9,6 @@ router.get('/', (req, res) => {
 })
 
 router.get('/api/gameroom', (req, res) => {
-  orm.startDecks('blackCards', (res) => {
-    const BlackDeck = [...res]
-    return BlackDeck
   })
 
   orm.startDecks('whiteCards', (res) => {
