@@ -23,8 +23,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server.js",
-    "lint": "jest",
-    "lint fix": "jest . --fix"
+    "lint": "eslint",
+    "lint fix": "eslint . --fix"
   },
   "author": "",
   "license": "ISC"
