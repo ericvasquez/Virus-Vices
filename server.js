@@ -2,30 +2,29 @@ const path = require("path");
 const http = require("http");
 const express = require("express");
 const exphbs = require("express-handlebars");
-const Handlebars = require("handlebars");
 const mysql = require("mysql");
 const socketio = require("socket.io");
 const formatMessage = require("./utils/messages");
 const {
-	userJoin,
-	getCurrentUser,
-	userLeave,
-	getRoomUsers,
+  userJoin,
+  getCurrentUser,
+  userLeave,
+  getRoomUsers,
 } = require("./utils/users");
 
 const db = mysql.createConnection({
-	host: "localhost",
-	port: 3306,
-	user: "root",
-	password: "",
-	database: "card_game",
+  host: "localhost",
+  port: 3306,
+  user: "root",
+  password: "",
+  database: "card_game",
 });
 
 db.connect((err) => {
-	if (err) {
-		throw err;
-	}
-	console.log("Mysql connected...");
+  if (err) {
+    throw err;
+  }
+  console.log("Mysql connected...");
 });
 
 const app = express();
@@ -34,10 +33,10 @@ const app = express();
 app.use(express.static("public"));
 
 // Parse request body as JSON
-app.use(express.urlencoded({extended: true}));
+app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
-app.engine("handlebars", exphbs({defaultLayout: "main"}));
+app.engine("handlebars", exphbs({ defaultLayout: "main" }));
 app.set("view engine", "handlebars");
 
 const server = http.createServer(app);
@@ -50,56 +49,56 @@ const chatHost = "Chat Host";
 
 //Run when user connects
 io.on("connection", (socket) => {
-	socket.on("joinRoom", ({username, room}) => {
-		const user = userJoin(socket.id, username, room);
-		socket.join(user.room);
-		console.log(user);
-		let sql = "INSERT INTO card_players2 SET ?";
-		let query = db.query(sql, user, (err, user) => {
-			console.log(user);
-			// res.send("Card added....");
-			// res.json({id: user.insertId});
-		});
+  socket.on("joinRoom", ({ username, room }) => {
+    const user = userJoin(socket.id, username, room);
+    socket.join(user.room);
+    console.log(user);
+    const sql = "INSERT INTO card_players2 SET ?";
+    const query = db.query(sql, user, (err, user) => {
+      console.log(user);
+      // res.send("Card added....");
+      // res.json({id: user.insertId});
+    });
 
-		//Welcome user
-		//socket.emit emits to individual
-		socket.emit("message", formatMessage(chatHost, "welcome to chat"));
+    //Welcome user
+    //socket.emit emits to individual
+    socket.emit("message", formatMessage(chatHost, "welcome to chat"));
 
-		//Broadcast when a user connects
-		//Broadcast emits to everyone but the user
-		socket.broadcast
-			.to(user.room)
-			.emit(
-				"message",
-				formatMessage(chatHost, `${user.username} has joined the chat`)
-			);
-		//Send users and room info
-		io.to(user.room).emit("roomUsers", {
-			room: user.room,
-			users: getRoomUsers(user.room),
-		});
-	});
+    //Broadcast when a user connects
+    //Broadcast emits to everyone but the user
+    socket.broadcast
+      .to(user.room)
+      .emit(
+        "message",
+        formatMessage(chatHost, `${user.username} has joined the chat`)
+      );
+    //Send users and room info
+    io.to(user.room).emit("roomUsers", {
+      room: user.room,
+      users: getRoomUsers(user.room),
+    });
+  });
 
-	//Listen for chat message     msg is a parameter for function
-	socket.on("chatMessage", (msg) => {
-		const user = getCurrentUser(socket.id);
-		//emit to everyone
-		io.to(user.room).emit("message", formatMessage(user.username, msg));
-	});
+  //Listen for chat message     msg is a parameter for function
+  socket.on("chatMessage", (msg) => {
+    const user = getCurrentUser(socket.id);
+    //emit to everyone
+    io.to(user.room).emit("message", formatMessage(user.username, msg));
+  });
 
-	//Runs when user disconnects
-	socket.on("disconnect", () => {
-		const user = userLeave(socket.id);
-		if (user) {
-			io.emit(
-				"message",
-				formatMessage(chatHost, `${user.username} has left the chat`)
-			);
-		}
-	});
+  //Runs when user disconnects
+  socket.on("disconnect", () => {
+    const user = userLeave(socket.id);
+    if (user) {
+      io.emit(
+        "message",
+        formatMessage(chatHost, `${user.username} has left the chat`)
+      );
+    }
+  });
 });
 
-var routes = require("./controllers/vv_controller");
+const routes = require("./controllers/vv_controller");
 
 app.use(routes);
 
