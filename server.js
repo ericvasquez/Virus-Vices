@@ -2,7 +2,6 @@ const path = require("path");
 const http = require("http");
 const express = require("express");
 const exphbs = require("express-handlebars");
-const Handlebars = require("handlebars");
 const mysql = require("mysql");
 const socketio = require("socket.io");
 const formatMessage = require("./utils/messages");
@@ -54,8 +53,8 @@ io.on("connection", (socket) => {
     const user = userJoin(socket.id, username, room);
     socket.join(user.room);
     console.log(user);
-    let sql = "INSERT INTO card_players2 SET ?";
-    let query = db.query(sql, user, (err, user) => {
+    const sql = "INSERT INTO card_players2 SET ?";
+    const query = db.query(sql, user, (err, user) => {
       console.log(user);
       // res.send("Card added....");
       // res.json({id: user.insertId});
@@ -99,7 +98,7 @@ io.on("connection", (socket) => {
   });
 });
 
-var routes = require("./controllers/vv_controller");
+const routes = require("./controllers/vv_controller");
 
 app.use(routes);
 
