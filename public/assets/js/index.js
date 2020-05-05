@@ -31,14 +31,19 @@ $(document).ready(function () {
 
     //Start Button
     //Fades in the Player Div's When Clicked
-    $("#start").on("click", function () {
-        $(".welcome").fadeOut(1000);
-        $(".navbar").fadeIn(1250);
-        $(".container").fadeIn(1250);
-    });
+    // $("#start").on("click", function () {
+    //     $.ajax({
+    //         type:"GET",
+    //         url: "/api/gameroom"
+    //     }).then(function(res) {
+    //         return render(res);
+    //     })
+    //     })
 
 
     //Giving the Players White Cards
+
+
     players.createPlayerDecks(newWhiteDeck);
 
 
@@ -259,17 +264,4 @@ $(document).ready(function () {
         }
     });
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-});
+})

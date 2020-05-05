@@ -202,7 +202,6 @@ a {
 
 .navbar {
   height: 70px;
-  display: none;
 }
 
 /*BUTTONS*/
@@ -258,7 +257,6 @@ a {
 
 .container {
   margin-top: 0 auto;
-  display: none;
 }
 
 .black-cards {
@@ -309,9 +307,9 @@ a {
   padding-top: 12px;
   text-align: center;
   word-wrap: break-word;
-  display: flex;                        
-  flex-direction: row;                 
-  justify-content: space-around;     
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
 }
 
 .player-white:hover {
@@ -326,9 +324,9 @@ a {
   padding-top: 12px;
   text-align: center;
   word-wrap: break-word;
-  display: flex;                        
-  flex-direction: row;                  
-  justify-content: space-around;        
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
 }
 
 .player-white-2:hover {
