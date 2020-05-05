@@ -1,32 +1,25 @@
-
-  <!-- NAV BAR -->
-  <div class="navbar navbar-inverse">
-      <button id="new-game">New Game</button>
-      <!-- <button id="rando-cardrissian">Rando Cardrissian</button> -->
-      <div id="header">Virus Vices</div>
-  </div>
-
-  <div class="welcome">
-      <div class="welcome-wrapper">
-          <div id="title">Virus </br>Vices</div> </br>
-          <div id="subtitle">A party game for horrible people</div>
-          <!-- <div id="instructions">
-              <h5>Rules</h5>
-              <p id="welcome-list">
-              • Card Czar chooses Black Card and reads it aloud.</br></br>
-              • Players select best matching card from their deck of random white cards. </br></br>
-              • Card Czar picks the funniest play and player is awarded an Awesome Point.</br></br>
-              • Highest score wins.</br></br>
-              • GAMBLING: Bet one of your Awesome Points by playing an additional white card.</br></br>
-              • You should be drinking.  But play anyway.</br></br>
-              </p>
-        </div> -->
-
-          <div id="start-wrapper">
-              <a href="/api/gameroom"><button id="start">Start</button></a>
-          </div>
-
-
-      </div>
-
-  </div>
+<div class="join-container">
+    <header class="join-header">
+        <h1><i class="fas fa-biohazard"></i> Virus Vices</h1>
+    </header>
+    <main class="join-main">
+        <form action="/api/gameroom ">
+            <div class="form-control">
+                <label for="username">Username</label>
+                <input type="text" name="username" id="username" placeholder="Enter username..." required />
+            </div>
+            <div class="form-control">
+                <label for="room">Room</label>
+                <select name="room" id="room">
+                    <option value="Room1">Game Room 1</option>
+                    <option value="Room2">Game Room 2</option>
+                    <!-- <option value="PHP">PHP</option>
+                    <option value="C#">C#</option>
+                    <option value="Ruby">Ruby</option>
+                    <option value="Java">Java</option> -->
+                </select>
+            </div>
+            <a href="/api/gameroom"><button type="submit" class="btn">Join Game</button></a>
+        </form>
+    </main>
+</div>
