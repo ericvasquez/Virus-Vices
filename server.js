@@ -23,7 +23,7 @@ const db = mysql.createConnection({
   host: "localhost",
   port: 3306,
   user: "root",
-  password: "",
+  password: "dolphinBench1",
   database: "card_game",
 >>>>>>> master
 });
@@ -112,4 +112,4 @@ app.use(routes);
 
 const PORT = process.env.PORT || 3000;
 
-server.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+app.listen(PORT, () => console.log(`Server running on port ${PORT}`));

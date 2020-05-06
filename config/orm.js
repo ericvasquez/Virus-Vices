@@ -9,8 +9,4 @@ const orm = {
     });
   },
 };
-<<<<<<< HEAD
 module.exports = orm;
-=======
-module.exports = orm;
->>>>>>> master

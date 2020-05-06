@@ -2,63 +2,52 @@
 // api-routes.js - this file offers a set of routes for displaying and saving data to the db
 // *********************************************************************************
 
-var db = require("../models");
+// Dependencies
+// =============================================================
+const Character = require("../models/index.js");
 
 // Routes
 // =============================================================
-module.exports = function(app) {
-
-  // GET route for getting all of the users
-  app.get("/api/user", function(req, res) {
-    // findAll returns all entries for a table when used with no options
-    db.User.findAll({}).then(function(dbUser) {
-      // We have access to the todos as an argument inside of the callback function
-      res.json(dbUser);
-    });
+module.exports = function (app) {
+  // Search for Specific Character (or all characters) then provides JSON
+  app.get("/api/:characters?", function (req, res) {
+    if (req.params.characters) {
+      // Display the JSON for ONLY that character.
+      // (Note how we're using the ORM here to run our searches)
+      Character.findOne({
+        where: {
+          routeName: req.params.characters,
+        }
+      }).then(function (result) {
+        return res.json(result);
+      });
+    } else {
+      Character.findAll().then(function (result) {
+        return res.json(result);
+      });
+    }
   });
 
-  // POST route for saving a new todo
-  app.post("/api/user", function(req, res) {
-    // create takes an argument of an object describing the item we want to
-    // insert into our table. In this case we just we pass in an object with a text
-    // and complete property
-    db.User.create({
-      name: req.body.text,
-      complete: req.body.complete
-    }).then(function(db) {
-      // We have access to the new todo as an argument inside of the callback function
-      res.json(dbUser);
-    });
-  });
+  // If a user sends data to add a new character...
+  app.post("/api/new", function (req, res) {
+    // Take the request...
+    const character = req.body;
 
-  // DELETE route for deleting todos. We can get the id of the todo to be deleted from
-  // req.params.id
-  app.delete("/api/user/:id", function(req, res) {
-    // We just have to specify which todo we want to destroy with "where"
-    db.User.destroy({
-      where: {
-        id: req.params.id
-      }
-    }).then(function(dbUser) {
-      res.json(dbUser);
+    // Create a routeName
+
+    // Using a RegEx Pattern to remove spaces from character.name
+    // You can read more about RegEx Patterns later https://www.regexbuddy.com/regex.html
+    const routeName = character.name.replace(/\s+/g, "").toLowerCase();
+
+    // Then add the character to the database using sequelize
+    Character.create({
+      routeName: routeName,
+      name: character.name,
+      role: character.role,
+      age: character.age,
+      forcePoints: character.forcePoints,
     });
 
+    res.status(204).end();
   });
-
-  // PUT route for updating todos. We can get the updated todo data from req.body
-  app.put("/api/user", function(req, res) {
-    // Update takes in an object describing the properties we want to update, and
-    // we use where to describe which objects we want to update
-    db.User.update({
-      text: req.body.text,
-      complete: req.body.complete
-    }, {
-      where: {
-        id: req.body.id
-      }
-    }).then(function(dbUser) {
-      res.json(dbUser);
-    });
-  });
-
 };
