@@ -13,11 +13,19 @@ const {
 } = require("./utils/users");
 
 const db = mysql.createConnection({
+<<<<<<< HEAD
+	host: "localhost",
+	port: 3306,
+	user: "root",
+	password: "ghm766",
+	database: "card_game",
+=======
   host: "localhost",
   port: 3306,
   user: "root",
   password: "dolphinBench1",
   database: "card_game",
+>>>>>>> master
 });
 
 db.connect((err) => {
