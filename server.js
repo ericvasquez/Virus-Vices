@@ -57,12 +57,12 @@ io.on("connection", (socket) => {
     const user = userJoin(socket.id, username, room);
     socket.join(user.room);
     console.log(user);
-    const sql = "INSERT INTO card_players2 SET ?";
-    const query = db.query(sql, user, (err, res) => {
-      console.log(user);
+  //const sql = "INSERT INTO card_players2 SET ?";
+   // const query = db.query(sql, user, (err, res) => {
+      //console.log(user);
       // res.send("Card added....");
       // res.json({id: user.insertId});
-    });
+    //});
 
     // Welcome user
     // socket.emit emits to individual
@@ -106,4 +106,6 @@ io.on("connection", (socket) => {
 
 const PORT = process.env.PORT || 3000;
 
-server.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+server.listen(PORT, () =>
+  console.log(`Server running on http://localhost:${PORT}`)
+);

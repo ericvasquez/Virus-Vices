@@ -9,6 +9,8 @@ const { username, room } = Qs.parse(location.search, {
   ignoreQueryPrefix: true,
 });
 
+console.log(room);
+
 //Script tag in chat.html allows use of
 const socket = io();
 

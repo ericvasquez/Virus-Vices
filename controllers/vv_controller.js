@@ -10,14 +10,6 @@ router.get("/", (req, res) => {
 
 router.get("/api/gameroom", (req, res) => {
   res.render("gameroom");
-  //   orm.startDecks('blackCards', (res) => {
-  //     const BlackDeck = [...res]
-  //     return BlackDeck
-  //   })
-
-  //   orm.startDecks('whiteCards', (res) => {
-  //     const whiteDeck = [...res]
-  //     return whiteDeck
-  //   })
 });
+
 module.exports = router;
