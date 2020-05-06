@@ -5,6 +5,7 @@ const exphbs = require("express-handlebars");
 const mysql = require("mysql");
 const socketio = require("socket.io");
 const formatMessage = require("./utils/messages");
+//const db = require("./models");
 const {
   userJoin,
   getCurrentUser,
@@ -12,20 +13,20 @@ const {
   getRoomUsers,
 } = require("./utils/users");
 
-const db = mysql.createConnection({
-  host: "localhost",
-  port: 3306,
-  user: "root",
-  password: "dolphinBench1",
-  database: "card_game",
-});
+// const db = mysql.createConnection({
+// host: "localhost",
+//   port: 3306,
+//   user: "root",
+//   password: "dolphinBench1",
+//   database: "card_game",
+// });
 
-db.connect((err) => {
-  if (err) {
-    throw err;
-  }
-  console.log("Mysql connected...");
-});
+// db.connect((err) => {
+//   if (err) {
+//     throw err;
+//   }
+//   console.log("Mysql connected...");
+// });
 
 const app = express();
 
@@ -103,5 +104,6 @@ const routes = require("./controllers/vv_controller");
 app.use(routes);
 
 const PORT = process.env.PORT || 3000;
-
+// db.sequelize.sync().then(function () {
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+// });
