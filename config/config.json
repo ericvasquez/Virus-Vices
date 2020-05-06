@@ -1,0 +1,27 @@
+{
+  "development": {
+    "username": "root",
+    "password": "dolphinBench1",
+    "database": "cards_db",
+    "host": "127.0.0.1",
+    "dialect": "mysql",
+    "operatorsAliases": false
+  },
+  "test": {
+    "username": "root",
+    "password": "dolphinBench1",
+    "database": "cards_db",
+    "host": "127.0.0.1",
+    "dialect": "mysql",
+    "operatorsAliases": false
+  },
+  "production": {
+    "use_env_variable": "JAWSDB_URL",
+    "username": "kd2nlx641w7pgrlp",
+    "password": "m2gq63l1hoszkh9z",
+    "database": "oquwyjhnx9dd4q3y",
+    "host": "i943okdfa47xqzpy.cbetxkdyhwsb.us-east-1.rds.amazonaws.com",
+    "dialect": "mysql",
+    "operatorsAliases": false
+  }
+}
