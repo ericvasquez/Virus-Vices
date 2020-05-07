@@ -9,9 +9,6 @@ router.get("/", (req, res) => {
 });
 
 router.get("/api/gameroom", (req, res) => {
-  orm.startDecks("blackCards", (res) => [...res]);
-
-  orm.startDecks("whiteCards", (res) => [...res]);
 
   res.render("index");
 });
