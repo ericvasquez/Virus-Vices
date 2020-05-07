@@ -13,20 +13,6 @@ const {
   getRoomUsers,
 } = require("./utils/users");
 
-// const db = mysql.createConnection({
-// host: "localhost",
-//   port: 3306,
-//   user: "root",
-//   password: "dolphinBench1",
-//   database: "card_game",
-// });
-
-// db.connect((err) => {
-//   if (err) {
-//     throw err;
-//   }
-//   console.log("Mysql connected...");
-// });
 
 const app = express();
 
@@ -54,12 +40,12 @@ io.on("connection", (socket) => {
     const user = userJoin(socket.id, username, room);
     socket.join(user.room);
     console.log(user);
-    const sql = "INSERT INTO card_players2 SET ?";
-    const query = db.query(sql, user, (err, user) => {
-      console.log(user);
-      // res.send("Card added....");
-      // res.json({id: user.insertId});
-    });
+    // const sql = "INSERT INTO card_players2 SET ?";
+    // const query = db.query(sql, user, (err, user) => {
+    //   console.log(user);
+    //   // res.send("Card added....");
+    //   // res.json({id: user.insertId});
+    // });
 
     //Welcome user
     //socket.emit emits to individual
